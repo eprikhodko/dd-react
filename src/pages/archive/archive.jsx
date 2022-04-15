@@ -6,12 +6,12 @@ import { AppRoute } from '../../const';
 const Archive = () => {
   return (
     <>
-      <Header mode={AppRoute.ARCHIVE}/>
+      <Header mode={AppRoute.ARCHIVE} />
       <section class="main__wrapper">
         <Board />
       </section>
     </>
-  )
-}
+  );
+};
 
 export default Archive;
