@@ -1,16 +1,17 @@
-import React from 'react';
-import Card from '../card/card';
+import React from "react";
+import Card from "../card/card";
+import LoadMore from "../load-more/load-more";
 
 const Board = () => {
   return (
-  <section className="board">
-    {/* Тут будет сортировка */}
-    <div className="board__events">
-      <Card />
-    </div>
-    <button className="load-more" type="button">Загрузить еще</button>
-  </section>
-  )
-}
+    <section className="board">
+      {/* Тут будет сортировка */}
+      <div className="board__events">
+        <Card />
+      </div>
+      <LoadMore />
+    </section>
+  );
+};
 
 export default Board;
