@@ -13,7 +13,7 @@ const App = () => {
           <Main />
         </Route>
         <Route path={AppRoute.ARCHIVE} exact component={Archive} />
-        <Route path={AppRoute.ADD} exact component={Form} />
+        <Route path={AppRoute.EVENT} exact component={Form} />
       </Switch>
     </BrowserRouter>
   );

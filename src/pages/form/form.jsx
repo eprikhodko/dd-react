@@ -4,13 +4,16 @@ import Filter from '../../components/filter/filter';
 import Event from '../../components/event/event';
 import { AppRoute } from '../../const.js';
 
-const Form = () => {
+const Form = (props) => {
+  const { id } = props.match.params;
   return (
     <>
       <Header mode={AppRoute.MAIN} />
       <section className="main__wrapper">
         <Filter />
-        <Event />
+        <section className="board">
+          <Event eventID={id} />
+        </section>
       </section>
     </>
   );
