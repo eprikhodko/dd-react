@@ -13,9 +13,9 @@ const App = () => {
           <Main />
         </Route>
         <Route path={AppRoute.ARCHIVE} exact component={Archive} />
+        <Route path={AppRoute.ADD} exact component={Form} />
       </Switch>
     </BrowserRouter>
-    // <Form />
   );
 };
 
