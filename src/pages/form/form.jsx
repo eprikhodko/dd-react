@@ -2,13 +2,13 @@ import React from 'react';
 import Header from '../../components/header/header';
 import Filter from '../../components/filter/filter';
 import Event from '../../components/event/event';
-import { AppRoute } from '../../const.js';
+import { useParams } from 'react-router-dom';
 
-const Form = (props) => {
-  const { id } = props.match.params;
+const Form = () => {
+  const { id } = useParams();
   return (
     <>
-      <Header mode={AppRoute.MAIN} />
+      <Header />
       <section className="main__wrapper">
         <Filter />
         <section className="board">
