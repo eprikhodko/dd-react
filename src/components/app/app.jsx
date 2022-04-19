@@ -10,7 +10,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact>
+        <Route path={AppRoute.MAIN} exact>
           <Main />
         </Route>
         <Route path={AppRoute.ARCHIVE} exact component={Archive} />

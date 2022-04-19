@@ -6,7 +6,6 @@ import { AppRoute } from '../../const';
 const Header = () => {
   const { pathname } = useLocation();
 
-  const extractRootPageName = (route) => route.substring(1).split('/')[0];
   const extractRootPathName = (path) => path.substring(1).split('/')[0];
 
   return (
@@ -15,22 +14,20 @@ const Header = () => {
         <span className="main__header-logo">SomeList</span>
         <div className="main__header-group-lnk">
           <Link
-            to="/"
-            className={`main__header-lnk ${pathname === '/' && 'lnk-active'} ${
+            to={AppRoute.MAIN}
+            className={`main__header-lnk ${
+              pathname === AppRoute.MAIN && 'lnk-active'
+            } ${
               extractRootPathName(pathname) ===
-                extractRootPageName(AppRoute.EVENT) && 'lnk-active'
+                extractRootPathName(AppRoute.ADD) && 'lnk-active'
             }`}
           >
             События
           </Link>
           <Link
             to={AppRoute.ARCHIVE}
-            className={`main__header-lnk ${
-              pathname.substring(1) === extractRootPageName(AppRoute.ARCHIVE) &&
-              'lnk-active'
-            } ${
-              extractRootPathName(pathname) ===
-                extractRootPageName(AppRoute.ARCHIVE) && 'lnk-active'
+            className={`main__header-lnk  ${
+              pathname === AppRoute.ARCHIVE && 'lnk-active'
             }`}
           >
             Архив
