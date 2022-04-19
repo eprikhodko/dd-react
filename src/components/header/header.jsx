@@ -24,7 +24,7 @@ const Header = () => {
             События
           </Link>
           <Link
-            to="/archive"
+            to={AppRoute.ARCHIVE}
             className={`main__header-lnk ${
               pathname.substring(1) === extractRootPageName(AppRoute.ARCHIVE) &&
               'lnk-active'
