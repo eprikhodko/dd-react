@@ -2,11 +2,13 @@ import React from 'react';
 import Card from '../card/card';
 import LoadMore from '../load-more/load-more';
 import Sorting from '../sorting/sorting';
+import { AppRoute } from '../../const';
 
-const Board = () => {
+const Board = ({ mode }) => {
   return (
     <section className="board">
-      <Sorting />
+      {mode !== AppRoute.ARCHIVE && <Sorting />}
+
       <div className="board__events">
         <Card />
       </div>
