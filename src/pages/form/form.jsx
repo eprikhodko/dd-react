@@ -10,7 +10,9 @@ const Form = () => {
       <Header mode={AppRoute.MAIN} />
       <section className="main__wrapper">
         <Filter />
-        <Event />
+        <section class="board">
+          <Event />
+        </section>
       </section>
     </>
   );
