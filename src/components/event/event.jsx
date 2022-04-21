@@ -3,11 +3,10 @@ import React from 'react';
 const Event = ({ eventID }) => {
   return (
     <form className="board__form">
-      {eventID ? (
-        <h2 className="board__title">Редактирование события</h2>
-      ) : (
-        <h2 className="board__title">Добавление события</h2>
-      )}
+      <h2 className="board__title">
+        {eventID ? 'Редактирование события' : 'Добавление события'}
+      </h2>
+
       <fieldset className="board__field board__field--theme">
         <label htmlFor="theme" className="board__label board__label--theme">
           Тема:
