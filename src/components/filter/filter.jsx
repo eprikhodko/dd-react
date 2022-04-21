@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 const Filter = () => {
   return (
@@ -51,9 +53,9 @@ const Filter = () => {
       <label htmlFor="filter__favorite" className="filter__label">
         Избранное <span className="filter__favorite-count count">1</span>
       </label>
-      <button name="control" className="btn-add">
+      <Link to={AppRoute.ADD} name="control" className="btn-add">
         Создать
-      </button>
+      </Link>
     </section>
   );
 };
