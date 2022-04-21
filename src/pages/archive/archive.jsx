@@ -7,7 +7,7 @@ const Archive = (props) => {
     <>
       <Header />
       <section class="main__wrapper">
-        <Board />
+        <Board mode={AppRoute.ARCHIVE} />
       </section>
     </>
   );
