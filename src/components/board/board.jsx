@@ -13,7 +13,9 @@ const Board = ({ events }) => {
       {pathname !== AppRoute.ARCHIVE && <Sorting />}
 
       <div className="board__events">
-        <Card />
+        {events.map((event) => (
+          <Card {...event} key={event._id} />
+        ))}
       </div>
       <LoadMore />
     </section>
