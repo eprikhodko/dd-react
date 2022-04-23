@@ -5,7 +5,7 @@ import Card from '../card/card';
 import LoadMore from '../load-more/load-more';
 import Sorting from '../sorting/sorting';
 
-const Board = () => {
+const Board = ({ events }) => {
   const { pathname } = useLocation();
 
   return (
