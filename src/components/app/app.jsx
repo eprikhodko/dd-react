@@ -6,22 +6,25 @@ import NotFound from '../../pages/not-found/not-found';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { observer } from 'mobx-react-lite';
-import { events } from '../../store/index';
+// import { events } from '../../store/index';
 
 const App = observer(() => {
-  const { data } = events;
+  // const { data } = events;
+
+  // console.log(events);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.MAIN} exact>
-          <Main events={data} />
+          <Main />
         </Route>
         <Route path={AppRoute.ARCHIVE} exact>
           <Archive />
         </Route>
         <Route path={AppRoute.EVENT} exact>
-          <Form events={data} />
+          {/* <Form events={data} /> */}
+          <Form />
         </Route>
         <Route>
           <NotFound />

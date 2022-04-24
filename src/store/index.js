@@ -37,6 +37,7 @@ class EventsStore {
       {
         autoBind: true,
         archiveData: computed,
+        notArchiveData: computed,
       }
     );
 
@@ -47,6 +48,12 @@ class EventsStore {
     return this.data
       .map((event) => new EventStore(event))
       .filter((x) => x.archive);
+  }
+
+  get notArchiveData() {
+    return this.data
+      .map((event) => new EventStore(event))
+      .filter((x) => !x.archive);
   }
 
   *fetch() {
