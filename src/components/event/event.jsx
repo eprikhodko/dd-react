@@ -1,6 +1,9 @@
 import React from 'react';
 
-const Event = ({ eventID }) => {
+const Event = ({ eventID, eventData }) => {
+  console.log(eventData);
+  const { _id, theme, comment, date, favorite } = eventData;
+  console.log(_id, theme, comment, date, favorite);
   return (
     <form className="board__form">
       <h2 className="board__title">
@@ -40,9 +43,16 @@ const Event = ({ eventID }) => {
         />
       </fieldset>
       <div className="btns">
-        <button type="submit" className="btn-submit">
-          Сохранить
-        </button>
+        {eventID ? (
+          <button type="submit" className="btn-submit">
+            Сохранить
+          </button>
+        ) : (
+          <button type="submit" class="btn-submit">
+            Добавить
+          </button>
+        )}
+
         <button type="reset" className="btn-reset">
           Очистить
         </button>
