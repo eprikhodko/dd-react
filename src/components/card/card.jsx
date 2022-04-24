@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import 'moment/locale/ru';
 
 const Card = ({ _id, theme, comment, date, favorite }) => {
+  const formatDate = moment(date).format('DD MMMM');
+
   return (
     <article className="card">
       <div className="card__form">
@@ -27,7 +31,7 @@ const Card = ({ _id, theme, comment, date, favorite }) => {
           </div>
 
           <div className="card__settings">
-            <span className="card__date">{date}</span>
+            <span className="card__date">{formatDate}</span>
           </div>
         </div>
       </div>
