@@ -5,9 +5,7 @@ import Filter from '../../components/filter/filter';
 import { useParams } from 'react-router-dom';
 
 const Form = ({ events }) => {
-  // console.log(events);
   const { id } = useParams();
-  // console.log(id);
 
   const getEventData = (eventIdentifier, eventsObjectsArray) => {
     const filteredEvent = eventsObjectsArray.filter(
@@ -18,7 +16,6 @@ const Form = ({ events }) => {
   };
 
   const eventData = getEventData(id, events);
-  // const { theme, comment, date } = eventData || {};
 
   return (
     <>

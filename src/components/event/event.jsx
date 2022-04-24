@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import moment from 'moment';
 
 const Event = ({ eventID, theme, comment, date }) => {
-  console.log(theme, comment, date);
-
   const formatDate = moment(date).format('YYYY-MM-DDTHH:mm');
-  console.log(formatDate);
 
   const [form, setForm] = useState({
-    theme: '',
-    comment: '',
+    theme: theme,
+    comment: comment,
     date: new Date(),
   });
 
@@ -17,8 +14,6 @@ const Event = ({ eventID, theme, comment, date }) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
-
-  console.log('current form state:', form);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +36,7 @@ const Event = ({ eventID, theme, comment, date }) => {
           className="board__input board__input--theme"
           name="theme"
           required
-          value={theme}
+          defaultValue={theme}
         ></textarea>
       </fieldset>
       <fieldset className="board__field board__field--comment">
@@ -54,7 +49,7 @@ const Event = ({ eventID, theme, comment, date }) => {
           className="board__input board__input--comment"
           name="comment"
           required
-          value={comment}
+          defaultValue={comment}
         ></textarea>
       </fieldset>
       <fieldset className="board__field board__field--date">
@@ -66,7 +61,7 @@ const Event = ({ eventID, theme, comment, date }) => {
           onChange={handleFieldChange}
           className="board__input board__input--date"
           name="date"
-          value={formatDate}
+          defaultValue={formatDate}
         />
       </fieldset>
       <div className="btns">
