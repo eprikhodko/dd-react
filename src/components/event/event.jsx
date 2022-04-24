@@ -4,10 +4,18 @@ import moment from 'moment';
 const Event = ({ eventID, theme, comment, date }) => {
   const formatDate = moment(date).format('YYYY-MM-DDTHH:mm');
 
+  const setRightDate = () => {
+    if (date) {
+      return date;
+    } else {
+      return new Date();
+    }
+  };
+
   const [form, setForm] = useState({
     theme: theme,
     comment: comment,
-    date: new Date(),
+    date: setRightDate(),
   });
 
   const handleFieldChange = (event) => {
