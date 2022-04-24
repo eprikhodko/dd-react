@@ -1,11 +1,10 @@
 import React from 'react';
 import Board from '../../components/board/board';
 import Header from '../../components/header/header';
+import { observer } from 'mobx-react-lite';
 import { events } from '../../store/index';
 
-const Archive = () => {
-  console.log(events);
-
+const Archive = observer(() => {
   const { archiveData } = events;
 
   return (
@@ -16,6 +15,6 @@ const Archive = () => {
       </section>
     </>
   );
-};
+});
 
 export default Archive;
