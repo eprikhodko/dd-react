@@ -27,7 +27,17 @@ class EventStore {
 }
 
 class EventsStore {
-  data = [];
+  data = [
+    {
+      _id: '622b3c3827c135009e310b26',
+      theme: 'Lorem Ipsum is simply dummy text of the printing',
+      comment:
+        'Lorem Ipsum has been the industrys standard dummy text ever since theme. If you are going to use a passage of Lorem Ipsum, you need to be sure there isnt anything embarrassing hidden in the middle of text.',
+      date: '2022-03-18T20:36:34.068Z',
+      archive: false,
+      favorite: true,
+    },
+  ];
 
   constructor() {
     makeAutoObservable(
