@@ -25,3 +25,19 @@ class EventStore {
     this.favorite = favorite;
   }
 }
+
+class EventsStore {
+  data = [];
+
+  constructor() {
+    makeAutoObservable(
+      this,
+      {},
+      {
+        autoBind: true,
+      }
+    );
+  }
+}
+
+export const events = new EventsStore();
