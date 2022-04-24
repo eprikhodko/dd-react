@@ -1,15 +1,18 @@
 import React from 'react';
 import Board from '../../components/board/board';
 import Header from '../../components/header/header';
+import { events } from '../../store/index';
 
-const Archive = ({ events }) => {
-  const archiveEvents = events.filter((x) => x.archive);
+const Archive = () => {
+  console.log(events);
+
+  const { archiveData } = events;
 
   return (
     <>
       <Header />
       <section class="main__wrapper">
-        <Board events={archiveEvents} />
+        <Board events={archiveData} />
       </section>
     </>
   );

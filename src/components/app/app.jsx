@@ -18,7 +18,7 @@ const App = observer(() => {
           <Main events={data} />
         </Route>
         <Route path={AppRoute.ARCHIVE} exact>
-          <Archive events={data} />
+          <Archive />
         </Route>
         <Route path={AppRoute.EVENT} exact>
           <Form events={data} />

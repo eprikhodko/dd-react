@@ -1,4 +1,4 @@
-import { makeAutoObservable, onBecomeObserved } from 'mobx';
+import { computed, makeAutoObservable, onBecomeObserved } from 'mobx';
 import { getEvents } from '../api';
 
 class EventStore {
@@ -36,10 +36,17 @@ class EventsStore {
       {},
       {
         autoBind: true,
+        archiveData: computed,
       }
     );
 
     onBecomeObserved(this, 'data', this.fetch);
+  }
+
+  get archiveData() {
+    return this.data
+      .map((event) => new EventStore(event))
+      .filter((x) => x.archive);
   }
 
   *fetch() {
