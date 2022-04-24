@@ -27,7 +27,7 @@ const Form = ({ events }) => {
       <section className="main__wrapper">
         <Filter />
         <section className="board">
-          <Event eventID={id} eventData={eventData} />
+          <Event eventID={id} eventData={eventData} {...eventData} />
         </section>
       </section>
     </>

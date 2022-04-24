@@ -1,8 +1,7 @@
 import React from 'react';
 
-const Event = ({ eventID, eventData }) => {
+const Event = ({ eventID, eventData, _id, theme, comment, date, favorite }) => {
   console.log(eventData);
-  const { _id, theme, comment, date, favorite } = eventData;
   console.log(_id, theme, comment, date, favorite);
   return (
     <form className="board__form">
