@@ -17,7 +17,9 @@ const Event = ({ eventID, theme, comment, date }) => {
           className="board__input board__input--theme"
           name="theme"
           required
-        ></textarea>
+        >
+          {theme}
+        </textarea>
       </fieldset>
       <fieldset className="board__field board__field--comment">
         <label htmlFor="comment" className="board__label board__label--comment">
@@ -28,7 +30,9 @@ const Event = ({ eventID, theme, comment, date }) => {
           className="board__input board__input--comment"
           name="comment"
           required
-        ></textarea>
+        >
+          {comment}
+        </textarea>
       </fieldset>
       <fieldset className="board__field board__field--date">
         <label htmlFor="date" className="board__label board__label--date">

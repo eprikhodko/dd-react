@@ -18,7 +18,7 @@ const Form = ({ events }) => {
   };
 
   const eventData = getEventData(id, events);
-  const { theme, comment, date } = eventData;
+  const { theme, comment, date } = eventData || {};
 
   return (
     <>
