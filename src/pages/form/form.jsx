@@ -18,7 +18,7 @@ const Form = ({ events }) => {
   };
 
   const eventData = getEventData(id, events);
-  const { theme, comment, date } = eventData || {};
+  // const { theme, comment, date } = eventData || {};
 
   return (
     <>
@@ -26,7 +26,7 @@ const Form = ({ events }) => {
       <section className="main__wrapper">
         <Filter />
         <section className="board">
-          <Event eventID={id} theme={theme} comment={comment} date={date} />
+          <Event eventID={id} {...eventData} />
         </section>
       </section>
     </>
