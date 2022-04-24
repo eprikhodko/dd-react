@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ru';
+import './card.css';
 
 const Card = ({ _id, theme, comment, date, favorite }) => {
   const formatDate = moment(date).format('DD MMMM');
@@ -17,7 +18,12 @@ const Card = ({ _id, theme, comment, date, favorite }) => {
             <button type="button" className="card__btn card__btn--archive">
               В архив
             </button>
-            <button type="button" className="card__btn card__btn--favorites">
+            <button
+              type="button"
+              className={`card__btn card__btn--favorites ${
+                favorite && `favorite-on`
+              }`}
+            >
               В избранное
             </button>
             <button type="button" className="card__btn card__btn--remove">
