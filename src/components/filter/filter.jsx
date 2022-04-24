@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useLocation } from 'react-router-dom';
 
 const Filter = () => {
+  const { pathname } = useLocation();
+
   return (
     <section className="main__filter filter">
       <input
@@ -53,9 +56,12 @@ const Filter = () => {
       <label htmlFor="filter__favorite" className="filter__label">
         Избранное <span className="filter__favorite-count count">1</span>
       </label>
-      <Link to={AppRoute.ADD} name="control" className="btn-add">
-        Создать
-      </Link>
+
+      {pathname === '/' && (
+        <Link to={AppRoute.ADD} name="control" className="btn-add">
+          Создать
+        </Link>
+      )}
     </section>
   );
 };
