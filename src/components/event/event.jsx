@@ -1,8 +1,7 @@
 import React from 'react';
 
-const Event = ({ eventID, eventData, _id, theme, comment, date, favorite }) => {
-  console.log(eventData);
-  console.log(_id, theme, comment, date, favorite);
+const Event = ({ eventID, theme, comment, date }) => {
+  console.log(theme, comment, date);
   return (
     <form className="board__form">
       <h2 className="board__title">
