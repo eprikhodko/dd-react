@@ -8,7 +8,7 @@ import { AppRoute } from '../../const';
 import { observer } from 'mobx-react-lite';
 // import { events } from '../../store/index';
 
-const App = observer(() => {
+const App = () => {
   // const { data } = events;
 
   // console.log(events);
@@ -32,6 +32,6 @@ const App = observer(() => {
       </Switch>
     </BrowserRouter>
   );
-});
+};
 
 export default App;

@@ -8,6 +8,8 @@ import { events } from '../../store';
 const Main = observer(() => {
   const { notArchiveData } = events;
 
+  console.log('events from main', events);
+
   return (
     <>
       <Header />

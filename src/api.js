@@ -16,6 +16,10 @@ export const getEvents = () => {
   return request(`${url}`);
 };
 
+export const getEvent = (id) => {
+  return request(`${url}/${id}`);
+};
+
 export const addEvent = (data) => {
   const eventData = {
     ...data,
