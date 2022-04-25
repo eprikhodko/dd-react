@@ -67,11 +67,13 @@ class EventsStore {
   }
 
   *addEvent(data) {
+    console.log(data);
     yield addEvent(data);
     yield this.fetch();
   }
 
   *editEvent(data) {
+    console.log(data);
     yield editEvent(data);
     yield this.fetch();
   }

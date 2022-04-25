@@ -1,9 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { events } from '../../store';
 import moment from 'moment';
+import { getEvent } from '../../api';
 
-const Event = ({ id, theme, comment, date, favorite, archive }) => {
+const Event = ({ eventID }) => {
+  console.log('this is event id:', eventID);
+  const formatDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
+
+  const [eventData, setEventData] = useState(null);
+  console.log('this is event data', eventData);
+
+  const { _id, theme, comment, date, favorite, archive } = eventData || {};
+
+  useEffect(() => {
+    const getEventData = async (evtID) => {
+      const response = await getEvent(evtID);
+
+      // console.log(response);
+      setEventData(response);
+      return response;
+    };
+
+    getEventData(eventID);
+  }, []);
+
+  // установим начальное значение полей формы
+  const [form, setForm] = useState({
+    theme: 'theme',
+    comment: 'comment',
+    date: formatDate,
+  });
+
+  // если мы находимся на странице какого то ивента, и у нас есть данные этого ивента, передадим в форму данные этого ивента
+  useEffect(() => {
+    if (eventData) {
+      console.log('im triggered');
+      setForm({
+        theme: theme,
+        comment: comment,
+        date: date,
+      });
+    }
+  }, [eventData]);
+
   // console.log(id, theme, comment, date, favorite, archive);
+
   // console.log(date);
   // console.log(formatDate);
 
@@ -15,63 +56,59 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
   //   }
   // };
 
-  const [formatDate, setFormatDate] = useState('');
+  // const currentDate = new Date();
+  // console.log(currentDate);
 
-  useEffect(() => {
-    // const formatedDate =
-    setFormatDate(moment(date).format('YYYY-MM-DDTHH:mm'));
-  }, [date]);
+  // const [formatDate, setFormatDate] = useState('');
+  // console.log(formatDate);
 
-  const handleEdit = (evt) => {
-    evt.preventDefault();
-    events.editEvent({
-      id,
-      theme,
-      comment,
-      date,
-      favorite,
-      archive,
-    });
-  };
-
-  useEffect(() => {
-    setForm({
-      theme: theme,
-      comment: comment,
-      date: date,
-    });
-  }, [theme]);
-
-  const [form, setForm] = useState({
-    theme: theme,
-    comment: comment,
-    date: date,
-  });
+  // useEffect(() => {
+  //   setFormatDate(moment(date).format('YYYY-MM-DDTHH:mm'));
+  //   console.log('use effect date', formatDate);
+  // }, [date]);
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
 
+  // const handleDate = (event) => {
+  //   console.log(event.target.value);
+  //   setForm({
+  //     date: event.target.value,
+  //   });
+  // };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('submitted form:', form);
-    events.editEvent({
-      id,
-      theme: form.theme,
-      comment: form.comment,
-      date: form.date,
-      favorite,
-      archive,
-    });
+
+    if (eventID) {
+      events.editEvent({
+        id: _id,
+        theme: form.theme,
+        comment: form.comment,
+        date: form.date,
+        favorite,
+        archive,
+      });
+    } else {
+      events.addEvent({
+        theme: form.theme,
+        comment: form.comment,
+        date: form.date,
+        favorite: false,
+        archive: false,
+      });
+    }
   };
 
-  console.log(form);
+  console.log('current form data:', form);
 
   return (
     <form className="board__form" onSubmit={handleSubmit}>
       <h2 className="board__title">
-        {id ? 'Редактирование события' : 'Добавление события'}
+        {eventID ? 'Редактирование события' : 'Добавление события'}
       </h2>
 
       <fieldset className="board__field board__field--theme">
@@ -84,7 +121,7 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
           className="board__input board__input--theme"
           name="theme"
           required
-          defaultValue={theme}
+          value={form.theme}
         ></textarea>
       </fieldset>
       <fieldset className="board__field board__field--comment">
@@ -97,7 +134,7 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
           className="board__input board__input--comment"
           name="comment"
           required
-          defaultValue={comment}
+          value={form.comment}
         ></textarea>
       </fieldset>
       <fieldset className="board__field board__field--date">
@@ -109,11 +146,12 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
           onChange={handleFieldChange}
           className="board__input board__input--date"
           name="date"
-          defaultValue={formatDate}
+          required
+          value={form.date}
         />
       </fieldset>
       <div className="btns">
-        {id ? (
+        {eventID ? (
           <button type="submit" className="btn-submit">
             Сохранить
           </button>
