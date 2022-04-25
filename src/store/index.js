@@ -36,12 +36,17 @@ class EventsStore {
       {},
       {
         autoBind: true,
+        allData: computed,
         archiveData: computed,
         notArchiveData: computed,
       }
     );
 
     onBecomeObserved(this, 'data', this.fetch);
+  }
+
+  get allData() {
+    return this.data.map((event) => new EventStore(event));
   }
 
   get archiveData() {
@@ -72,6 +77,7 @@ class EventsStore {
   }
 
   *editEvent(data) {
+    console.log(data);
     yield editEvent(data);
     yield this.fetch();
   }

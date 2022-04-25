@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { events } from '../../store';
 import moment from 'moment';
 
-const Event = ({ id, theme, comment, date, favorite, archive }) => {
-  // console.log(id, theme, comment, date, favorite, archive);
+const Event = ({ _id, theme, comment, date, favorite, archive }) => {
+  console.log(_id, theme, comment, date, favorite, archive);
   // console.log(date);
   // console.log(formatDate);
 
@@ -25,7 +25,7 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
   const handleEdit = (evt) => {
     evt.preventDefault();
     events.editEvent({
-      id,
+      id: _id,
       theme,
       comment,
       date,
@@ -57,8 +57,8 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
     event.preventDefault();
     console.log('submitted form:', form);
     events.editEvent({
-      id,
-      theme,
+      id: _id,
+      theme: form.theme,
       comment,
       date,
       favorite,
@@ -71,7 +71,7 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
   return (
     <form className="board__form" onSubmit={handleSubmit}>
       <h2 className="board__title">
-        {id ? 'Редактирование события' : 'Добавление события'}
+        {_id ? 'Редактирование события' : 'Добавление события'}
       </h2>
 
       <fieldset className="board__field board__field--theme">
@@ -113,7 +113,7 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
         />
       </fieldset>
       <div className="btns">
-        {id ? (
+        {_id ? (
           <button type="submit" className="btn-submit">
             Сохранить
           </button>
