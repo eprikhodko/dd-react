@@ -58,9 +58,9 @@ const Event = ({ id, theme, comment, date, favorite, archive }) => {
     console.log('submitted form:', form);
     events.editEvent({
       id,
-      theme,
-      comment,
-      date,
+      theme: form.theme,
+      comment: form.comment,
+      date: form.date,
       favorite,
       archive,
     });
