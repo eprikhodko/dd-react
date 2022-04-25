@@ -4,15 +4,12 @@ import moment from 'moment';
 import { getEvent } from '../../api';
 
 const Event = ({ eventID }) => {
-  console.log('this is event id:', eventID);
   const formatDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
 
   const [eventData, setEventData] = useState(null);
-  console.log('this is event data', eventData);
-
   const { _id, theme, comment, date, favorite, archive } = eventData || {};
 
-  // установим начальное значение полей формы
+  // установим начальное значение полей формы, для страницы создания нового ивента
   const [form, setForm] = useState({
     theme: '',
     comment: '',
@@ -34,10 +31,9 @@ const Event = ({ eventID }) => {
     }
   }, []);
 
-  // если мы находимся на странице какого то ивента, и мы получили данные этого ивента, передадим их в форму
+  // если мы получили данные ивента по его id, передадим их в форму. Это нужно для того, чтобы поля нашей формы были заполнены, когда мы открываем на редактирования какой либо ивент
   useEffect(() => {
     if (eventData) {
-      console.log('im triggered');
       setForm({
         theme: theme,
         comment: comment,
@@ -74,8 +70,6 @@ const Event = ({ eventID }) => {
       });
     }
   };
-
-  console.log('current form data:', form);
 
   return (
     <form className="board__form" onSubmit={handleSubmit}>
