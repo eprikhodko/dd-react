@@ -15,3 +15,20 @@ const request = async (url, method = 'GET', body) => {
 export const getEvents = () => {
   return request(`${url}`);
 };
+
+export const addEvent = (data) => {
+  const eventData = {
+    ...data,
+    favorite: false,
+    archive: false,
+  };
+  return request(`${url}`, 'POST', eventData);
+};
+
+export const deleteEvent = (id) => {
+  return request(`${url}/${id}`, 'DELETE');
+};
+
+export const editEvent = (data) => {
+  return request(`${url}`, 'PUT', data);
+};
