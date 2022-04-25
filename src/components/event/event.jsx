@@ -12,26 +12,29 @@ const Event = ({ eventID }) => {
 
   const { _id, theme, comment, date, favorite, archive } = eventData || {};
 
-  useEffect(() => {
-    const getEventData = async (evtID) => {
-      const response = await getEvent(evtID);
-
-      // console.log(response);
-      setEventData(response);
-      return response;
-    };
-
-    getEventData(eventID);
-  }, []);
-
   // установим начальное значение полей формы
   const [form, setForm] = useState({
-    theme: 'theme',
-    comment: 'comment',
+    theme: '',
+    comment: '',
     date: formatDate,
   });
 
-  // если мы находимся на странице какого то ивента, и у нас есть данные этого ивента, передадим в форму данные этого ивента
+  // получим данные ивента по его id
+  useEffect(() => {
+    // если у нас есть id ивента, сделаем запрос к серверу,
+    if (eventID) {
+      const getEventData = async (evtID) => {
+        const response = await getEvent(evtID);
+
+        setEventData(response);
+        return response;
+      };
+
+      getEventData(eventID);
+    }
+  }, []);
+
+  // если мы находимся на странице какого то ивента, и мы получили данные этого ивента, передадим их в форму
   useEffect(() => {
     if (eventData) {
       console.log('im triggered');
@@ -43,41 +46,10 @@ const Event = ({ eventID }) => {
     }
   }, [eventData]);
 
-  // console.log(id, theme, comment, date, favorite, archive);
-
-  // console.log(date);
-  // console.log(formatDate);
-
-  // const setRightDate = () => {
-  //   if (date) {
-  //     return date;
-  //   } else {
-  //     return new Date();
-  //   }
-  // };
-
-  // const currentDate = new Date();
-  // console.log(currentDate);
-
-  // const [formatDate, setFormatDate] = useState('');
-  // console.log(formatDate);
-
-  // useEffect(() => {
-  //   setFormatDate(moment(date).format('YYYY-MM-DDTHH:mm'));
-  //   console.log('use effect date', formatDate);
-  // }, [date]);
-
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
-
-  // const handleDate = (event) => {
-  //   console.log(event.target.value);
-  //   setForm({
-  //     date: event.target.value,
-  //   });
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
