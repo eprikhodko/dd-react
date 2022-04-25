@@ -1,5 +1,5 @@
 import { computed, makeAutoObservable, onBecomeObserved } from 'mobx';
-import { getEvents, addEvent, editEvent, deleteEvent } from '../api';
+import { getEvents, getEvent, addEvent, editEvent, deleteEvent } from '../api';
 
 class EventStore {
   _id;
@@ -59,6 +59,11 @@ class EventsStore {
   *fetch() {
     const response = yield getEvents();
     this.data = response.map((event) => new EventStore(event));
+  }
+
+  *getEvent(id) {
+    yield getEvent(id);
+    yield this.fetch();
   }
 
   *addEvent(data) {

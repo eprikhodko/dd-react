@@ -1,21 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { events } from '../../store';
 import moment from 'moment';
 
-const Event = ({ eventID, theme, comment, date }) => {
-  const formatDate = moment(date).format('YYYY-MM-DDTHH:mm');
+const Event = ({ id, theme, comment, date, favorite, archive }) => {
+  // console.log(id, theme, comment, date, favorite, archive);
+  // console.log(date);
+  // console.log(formatDate);
 
-  const setRightDate = () => {
-    if (date) {
-      return date;
-    } else {
-      return new Date();
-    }
+  // const setRightDate = () => {
+  //   if (date) {
+  //     return date;
+  //   } else {
+  //     return new Date();
+  //   }
+  // };
+
+  const [formatDate, setFormatDate] = useState('');
+
+  useEffect(() => {
+    // const formatedDate =
+    setFormatDate(moment(date).format('YYYY-MM-DDTHH:mm'));
+  }, [date]);
+
+  const handleEdit = (evt) => {
+    evt.preventDefault();
+    events.editEvent({
+      id,
+      theme,
+      comment,
+      date,
+      favorite,
+      archive,
+    });
   };
+
+  useEffect(() => {
+    setForm({
+      theme: theme,
+      comment: comment,
+      date: date,
+    });
+  }, [theme]);
 
   const [form, setForm] = useState({
     theme: theme,
     comment: comment,
-    date: setRightDate(),
+    date: date,
   });
 
   const handleFieldChange = (event) => {
@@ -26,12 +56,22 @@ const Event = ({ eventID, theme, comment, date }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('submitted form:', form);
+    events.editEvent({
+      id,
+      theme,
+      comment,
+      date,
+      favorite,
+      archive,
+    });
   };
+
+  console.log(form);
 
   return (
     <form className="board__form" onSubmit={handleSubmit}>
       <h2 className="board__title">
-        {eventID ? 'Редактирование события' : 'Добавление события'}
+        {id ? 'Редактирование события' : 'Добавление события'}
       </h2>
 
       <fieldset className="board__field board__field--theme">
@@ -73,7 +113,7 @@ const Event = ({ eventID, theme, comment, date }) => {
         />
       </fieldset>
       <div className="btns">
-        {eventID ? (
+        {id ? (
           <button type="submit" className="btn-submit">
             Сохранить
           </button>

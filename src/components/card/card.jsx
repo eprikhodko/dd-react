@@ -8,7 +8,11 @@ import { events } from '../../store/index';
 const Card = ({ _id, theme, comment, date, favorite, archive }) => {
   const formatDate = moment(date).format('DD MMMM');
 
-  const handleToEdit = () => {};
+  const handleToEdit = (evt) => {
+    // evt.preventDefault();
+    // events.getEvent(_id);
+    // console.log(events.getEvent(_id));
+  };
 
   const handleToArchive = (evt) => {
     evt.preventDefault();
