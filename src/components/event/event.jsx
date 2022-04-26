@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { events } from '../../store';
 import moment from 'moment';
 import { getEvent } from '../../api';
 
 const Event = ({ eventID }) => {
-  const currentDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
-
   const [eventData, setEventData] = useState(null);
   const { _id, theme, comment, date, favorite, archive } = eventData || {};
 
+  const history = useHistory();
+  const currentDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
   // установим начальное значение полей формы, для страницы создания нового ивента
   const [form, setForm] = useState({
     theme: '',
@@ -52,23 +53,26 @@ const Event = ({ eventID }) => {
     console.log('submitted form:', form);
 
     if (eventID) {
-      events.editEvent({
-        id: _id,
-        theme: form.theme,
-        comment: form.comment,
-        date: form.date,
-        favorite,
-        archive,
-      });
+      events
+        .editEvent({
+          id: _id,
+          theme: form.theme,
+          comment: form.comment,
+          date: form.date,
+          favorite,
+          archive,
+        })
+        .then(() => history.push('/'));
     } else {
-      events.addEvent({
-        theme: form.theme,
-        comment: form.comment,
-        date: form.date,
-        favorite: false,
-        archive: false,
-      });
-      console.log('event added');
+      events
+        .addEvent({
+          theme: form.theme,
+          comment: form.comment,
+          date: form.date,
+          favorite: false,
+          archive: false,
+        })
+        .then(() => history.push('/'));
     }
   };
 
