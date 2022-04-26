@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Card from '../card/card';
@@ -9,6 +9,12 @@ import { deleteArchiveEvents } from '../../api';
 const Board = ({ events }) => {
   const { pathname } = useLocation();
   const history = useHistory();
+
+  const [step, setStep] = useState(1);
+
+  const handleLoadMore = () => {
+    events.length >= step ? setStep(step + 1) : setStep(events.length);
+  };
 
   const handleDeleteArchiveEvents = () => {
     deleteArchiveEvents();
@@ -22,8 +28,8 @@ const Board = ({ events }) => {
       {pathname !== AppRoute.ARCHIVE && <Sorting />}
 
       <div className="board__events">
-        {events.map((event) => (
-          <Card {...event} key={event._id} />
+        {events.slice(0, step).map((event) => (
+          <Card event={event} key={event._id} />
         ))}
       </div>
 
@@ -37,7 +43,7 @@ const Board = ({ events }) => {
         </button>
       )}
 
-      <LoadMore />
+      <LoadMore handleLoadMore={handleLoadMore} />
     </section>
   );
 };
