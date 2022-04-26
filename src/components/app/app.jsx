@@ -5,14 +5,8 @@ import Form from '../../pages/form/form';
 import NotFound from '../../pages/not-found/not-found';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { observer } from 'mobx-react-lite';
-// import { events } from '../../store/index';
 
 const App = () => {
-  // const { data } = events;
-
-  // console.log(events);
-
   return (
     <BrowserRouter>
       <Switch>
@@ -23,7 +17,6 @@ const App = () => {
           <Archive />
         </Route>
         <Route path={AppRoute.EVENT} exact>
-          {/* <Form events={data} /> */}
           <Form />
         </Route>
         <Route>

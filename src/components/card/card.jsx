@@ -8,12 +8,6 @@ import { events } from '../../store/index';
 const Card = ({ _id, theme, comment, date, favorite, archive }) => {
   const formatDate = moment(date).format('DD MMMM');
 
-  const handleToEdit = (evt) => {
-    // evt.preventDefault();
-    // events.getEvent(_id);
-    // console.log(events.getEvent(_id));
-  };
-
   const handleToArchive = (evt) => {
     evt.preventDefault();
     events.editEvent({
@@ -52,7 +46,6 @@ const Card = ({ _id, theme, comment, date, favorite, archive }) => {
               to={`/event/${_id}`}
               type="button"
               className="card__btn card__btn--edit"
-              onClick={handleToEdit}
             >
               Редактировать
             </Link>
