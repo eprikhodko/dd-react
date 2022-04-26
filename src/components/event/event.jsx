@@ -4,7 +4,7 @@ import moment from 'moment';
 import { getEvent } from '../../api';
 
 const Event = ({ eventID }) => {
-  const formatDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
+  const currentDate = moment(new Date()).format('YYYY-MM-DDTHH:mm');
 
   const [eventData, setEventData] = useState(null);
   const { _id, theme, comment, date, favorite, archive } = eventData || {};
@@ -13,7 +13,7 @@ const Event = ({ eventID }) => {
   const [form, setForm] = useState({
     theme: '',
     comment: '',
-    date: formatDate,
+    date: currentDate,
   });
 
   // получим данные ивента по его id
@@ -68,7 +68,16 @@ const Event = ({ eventID }) => {
         favorite: false,
         archive: false,
       });
+      console.log('event added');
     }
+  };
+
+  const handleClearForm = () => {
+    setForm({
+      theme: '',
+      comment: '',
+      date: currentDate,
+    });
   };
 
   return (
@@ -127,7 +136,7 @@ const Event = ({ eventID }) => {
           </button>
         )}
 
-        <button type="reset" className="btn-reset">
+        <button type="reset" onClick={handleClearForm} className="btn-reset">
           Очистить
         </button>
       </div>
