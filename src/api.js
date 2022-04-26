@@ -36,3 +36,7 @@ export const deleteEvent = (id) => {
 export const editEvent = (data) => {
   return request(`${url}`, 'PUT', data);
 };
+
+export const deleteArchiveEvents = () => {
+  return request(`${url}/archive/delete`, 'DELETE');
+};
