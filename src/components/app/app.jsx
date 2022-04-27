@@ -13,8 +13,12 @@ const App = () => {
         <Route path={AppRoute.MAIN} exact>
           <Main />
         </Route>
-        <Route path={AppRoute.ARCHIVE} exact component={Archive} />
-        <Route path={AppRoute.EVENT} exact component={Form} />
+        <Route path={AppRoute.ARCHIVE} exact>
+          <Archive />
+        </Route>
+        <Route path={AppRoute.EVENT} exact>
+          <Form />
+        </Route>
         <Route>
           <NotFound />
         </Route>
