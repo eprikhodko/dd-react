@@ -2,31 +2,11 @@ import { makeAutoObservable, onBecomeObserved } from 'mobx';
 import { getEvents, addEvent, editEvent, deleteEvent } from '../api';
 import moment from 'moment';
 
-// class EventStore {
-//   _id;
-//   theme = '';
-//   comment = '';
-//   date = new Date();
-//   archive = false;
-//   favorite = false;
-
-//   constructor({_id, theme, comment, date, archive, favorite}) {
-//     makeAutoObservable(this, {}, {
-//       autoBind: true
-//     });
-
-//     this._id = _id;
-//     this.theme = theme;
-//     this.comment = comment;
-//     this.date = date;
-//     this.archive = archive;
-//     this.favorite = favorite;
-//   }
-// }
-
 class EventsStore {
   data = [];
   filtredData = [];
+  sortedByNew = [];
+  sortedByOld = [];
 
   constructor() {
     makeAutoObservable(
@@ -38,6 +18,25 @@ class EventsStore {
     );
 
     onBecomeObserved(this, 'data', this.fetch);
+  }
+
+  get sortedByNewData() {
+    // console.log(this.data);
+    return this.data.slice().sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.date) - new Date(a.date);
+    });
+  }
+
+  get sortedByOldData() {
+    // console.log(this.data);
+
+    return this.data.slice().sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a.date) - new Date(b.date);
+    });
   }
 
   get archiveData() {
@@ -74,6 +73,28 @@ class EventsStore {
     const response = yield getEvents();
     this.data = response;
     this.filtredData = response.filter((x) => !x.archive);
+    this.sortedByNew = response.slice().sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a.date) - new Date(b.date);
+    });
+    this.sortedByOld = response.slice().sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.date) - new Date(a.date);
+    });
+    // console.log('original response:', response);
+    // const sortedResponse = response.slice().sort(function (a, b) {
+    //   // Turn your strings into dates, and then subtract them
+    //   // to get a value that is either negative, positive, or zero.
+    //   return new Date(a.date) - new Date(b.date);
+    // });
+    // console.log('sorted response', sortedResponse);
+
+    // console.log(response[0].date);
+    // console.log(new Date(response[0].date));
+    // const formatDate = moment(response[0].date);
+    // console.log(formatDate);
   }
 
   *addEvent(data) {
