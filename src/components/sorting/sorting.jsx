@@ -7,7 +7,6 @@ const { notArchiveData, sortedByNewData, sortedByOldData } = events;
 
 const handleFiltred = action((e) => {
   events.filtredData = events[e.target.value];
-  console.log(events.filtredData);
 });
 
 const Sorting = observer(() => {

@@ -5,8 +5,6 @@ import moment from 'moment';
 class EventsStore {
   data = [];
   filtredData = [];
-  sortedByNew = [];
-  sortedByOld = [];
 
   constructor() {
     makeAutoObservable(
@@ -21,22 +19,21 @@ class EventsStore {
   }
 
   get sortedByNewData() {
-    // console.log(this.data);
-    return this.data.slice().sort(function (a, b) {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(b.date) - new Date(a.date);
-    });
+    return this.data
+      .slice()
+      .sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      })
+      .filter((x) => !x.archive);
   }
 
   get sortedByOldData() {
-    // console.log(this.data);
-
-    return this.data.slice().sort(function (a, b) {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(a.date) - new Date(b.date);
-    });
+    return this.data
+      .slice()
+      .sort(function (a, b) {
+        return new Date(a.date) - new Date(b.date);
+      })
+      .filter((x) => !x.archive);
   }
 
   get archiveData() {
@@ -73,28 +70,6 @@ class EventsStore {
     const response = yield getEvents();
     this.data = response;
     this.filtredData = response.filter((x) => !x.archive);
-    this.sortedByNew = response.slice().sort(function (a, b) {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(a.date) - new Date(b.date);
-    });
-    this.sortedByOld = response.slice().sort(function (a, b) {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(b.date) - new Date(a.date);
-    });
-    // console.log('original response:', response);
-    // const sortedResponse = response.slice().sort(function (a, b) {
-    //   // Turn your strings into dates, and then subtract them
-    //   // to get a value that is either negative, positive, or zero.
-    //   return new Date(a.date) - new Date(b.date);
-    // });
-    // console.log('sorted response', sortedResponse);
-
-    // console.log(response[0].date);
-    // console.log(new Date(response[0].date));
-    // const formatDate = moment(response[0].date);
-    // console.log(formatDate);
   }
 
   *addEvent(data) {
